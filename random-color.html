@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Generator</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        #container {
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #colorBtn {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #colorBtn:hover {
+            background-color: #2980b9;
+        }
+
+        #resetBtn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #resetBtn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Color Generator</h1>
+    <button id="colorBtn">Change Color</button>
+    <button id="resetBtn">Reset Color</button>
+    <div id="container">Color Code: <span id="colorCode">#FFFFFF</span></div>
+
+    <script>
+        // Function to generate a random hex color code
+        function getRandomColor() {
+            let color = "#";
+            const characters = "0123456789ABCDEF";
+
+            for (let i = 0; i < 6; i++) {
+                color += characters[Math.floor(Math.random() * 16)];
+            }
+
+            return color;
+        }
+
+        // Event listener for the "Change Color" button
+        document.getElementById("colorBtn").addEventListener("click", function () {
+            const randomColor = getRandomColor();
+            const container = document.getElementById("container");
+            const colorCode = document.getElementById("colorCode");
+
+            container.style.backgroundColor = randomColor;
+            colorCode.textContent = randomColor;
+        });
+
+        // Event listener for the "Change Color" button mouseover
+        document.getElementById("colorBtn").addEventListener("mouseover", function () {
+            this.style.backgroundColor = "#2980b9";
+        });
+
+        // Event listener for the "Change Color" button mouseout
+        document.getElementById("colorBtn").addEventListener("mouseout", function () {
+            this.style.backgroundColor = "#3498db";
+        });
+
+        // Event listener for the "Reset Color" button
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            const container = document.getElementById("container");
+            const colorCode = document.getElementById("colorCode");
+
+            container.style.backgroundColor = "#FFFFFF";
+            colorCode.textContent = "#FFFFFF";
+        });
+    </script>
+</body>
+</html>

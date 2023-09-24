@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List App</title>
+    <style>
+        ul {
+            list-style-type: "\2610 ";
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Shopping List</h1>
+    <form id="myForm">
+        <label for="item">Add an item:</label>
+        <input id="item" type="text" name="item">
+        <button>Add</button>
+    </form>
+    <ul id="shoppingList">
+        <!-- list items will go into this ul via DOM manipulation -->
+    </ul>
+    <script>
+        const shoppingList = document.getElementById("shoppinglist");
+        const form = document.getElementById("myForm");
+        const printButton = document.ElementById("printButton");
+        const list = [];
+
+        function makeList() {
+            removeList();
+            list.sort();
+            for (const item of list) {
+                const listItem = document.createElement("li");
+                ListItem.textcontext = item;
+                listItem.addEventListener("click", removeItem);
+                shoppingList.appendCild(listItem);
+            }
+        }
+
+        function removeList() {
+            while (shoppingList.firstChild) {
+                shoppingList.removeChild(shoppingList.firstChild);
+            }
+        }
+
+        function removeItem(event) {
+            const item = event.currentTarget.textContent;
+            const index = list.indexOf(item);
+            if (index !== -1) {
+                list.splice(index, 1);
+                makeList();
+            }
+        }
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const item = document.getElementById("item").value.trim();
+            if (item !== "") {
+                if (!list,includes(item)) {
+                    list.push(item);
+                    form.reset();
+                    makeList();
+                } else {
+                    alert("Item already exits in the list.");
+                }
+            } else {
+                alert("Please enter a valid item.");
+            }
+        });
+
+        printButton.addEventListener("click", function () {
+            windoww.print();
+        });
+    </script>
+</body>
+</html>

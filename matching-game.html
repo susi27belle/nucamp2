@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+</head>
+<body id="smile" onload="generateFaces()">
+    <h1>Matching Game</h1>
+    <p>Click on the extra smilling face on the left.</p>
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+    <style>
+        img{
+            position: absolute;
+        }
+        div{
+            position: absolute;
+            width: 500px;
+            height: 500px;
+        }
+        #rightSide{
+            left: 500px;
+            border-left: 1px solid;
+        } 
+
+    </style>
+    <script>
+        let numberOfFaces = 5;
+        let theLeftSide = document.getElementById("leftSide");
+        let theRightSide = document.getElementById("rightSide");
+
+
+        function generateFaces() {
+            for (let i = 0; i < numberOfFaces; i++) {
+                let face = document.createElement("img");
+                face.src = 'images/smile.png';
+                let randomTop = Math.floor(Math.random() * 400);
+                let randomLeft = Math.floor(Math.random() * 400);
+                face.style.top = randomTop + "px";
+                face.style.left = randomLeft + "px";
+                theLeftSide.appendChild(face);     
+            }
+            const leftSideImages = theLeftSide.cloneNode(true);
+            leftSideImages.removeChild(leftSideImages.lastChild);
+            theRightSide.appendChild(leftSideImages); 
+
+        function nextLevel(event) {
+            event.stopPropagation();
+            while(theRightSide.firstChild){
+                theRightSide.removeChild(theRightSide.firstChild);
+            }
+            numberOfFaces += 5;
+            generateFaces();
+        }
+        theLeftSide.lastChild.addEventListener('click', nextLevel);
+        document.getElementById("smile").addEventListener('click', gameOver);
+
+    }
+    function gameOver() {
+        alert("game over!");
+        theRightSide.lastChild.removeEventListener('click', nextLevel);
+        document.getElementById("smile").removeEventListener('click', gameOver);
+        while(theRightSide.firstChild){
+            theRightSide.removeChild(theRightSide.firstChild);
+        }
+    }
+            
+    </script>
+    
+</body>
+</html>
